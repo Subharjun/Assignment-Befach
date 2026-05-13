@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma-data:/app/.chroma
+    extra_hosts:
+      # Lets the container call your host machine's Ollama at host.docker.internal:11434
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    env_file: ./frontend/.env
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  chroma-data:
