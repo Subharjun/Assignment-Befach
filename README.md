@@ -11,6 +11,7 @@ Think of it like Amazon or Flipkart, but your shopping assistant is an AI that y
 
 - [How It Works (Simple Explanation)](#-how-it-works-simple-explanation)
 - [Technology Stack](#-technology-stack)
+- [⚡ Using Groq for Fast Inference](#-using-groq-for-fast-inference)
 - [Architecture Overview](#-architecture-overview)
 - [Project Structure](#-project-structure)
 - [Prerequisites](#-prerequisites-what-you-need-before-starting)
@@ -30,7 +31,7 @@ Think of it like Amazon or Flipkart, but your shopping assistant is an AI that y
 
 When a user types a message to Maya like *"I want red sneakers under ₹2000"*, the system does four things automatically:
 
-1. **Understands the intent** — A small AI model (`qwen2.5:3b`) reads the message and extracts structured info: category = shoes, colour = red, max price = ₹2000.
+1. **Understands the intent** — An AI model (default: `qwen2.5:3b` via Ollama, or `llama-3.3-70b` via Groq) reads the message and extracts structured info: category = shoes, colour = red, max price = ₹2000.
 2. **Searches smartly** — The query is converted into a vector (a mathematical representation) using `nomic-embed-text`, and ChromaDB finds the most relevant products from the catalog.
 3. **Replies like a human** — Maya responds in a friendly, focused way with matching product suggestions.
 4. **Remembers preferences** — Maya stores what the user likes so future recommendations get better over time.
@@ -61,11 +62,31 @@ When a user types a message to Maya like *"I want red sneakers under ₹2000"*, 
 | **Zustand** | 5.0+ | State management (cart, chat, theme) |
 | **Lucide React** | — | Icons |
 
-### AI Models (run via Ollama)
-| Model | Purpose |
-|---|---|
-| `qwen2.5:3b` | Chat assistant — understands intent, generates replies |
-| `nomic-embed-text` | Converts text to vectors for semantic search |
+### AI Models
+| Model | Provider | Purpose |
+|---|---|---|
+| `qwen2.5:3b` | **Ollama** | Default local chat assistant |
+| `nomic-embed-text` | **Ollama** | Mandatory embedding model (local) |
+| `llama-3.3-70b-versatile`| **Groq** | **Recommended:** High-speed cloud reasoning |
+
+---
+
+## ⚡ Using Groq for Fast Inference
+
+While MayaMall runs fully locally by default using Ollama, we highly recommend using **Groq** for the chat component. This provides:
+- **Instant Responses**: Sub-second reasoning and token generation.
+- **Better Reasoning**: Uses Llama 3.3 70B, which is much smarter than local 3B models.
+- **Hybrid Performance**: Embeddings remain local (free & private) while reasoning happens in the cloud.
+
+### How to enable Groq:
+1. Get a free API key from [Groq Console](https://console.groq.com/keys).
+2. Open `backend/.env`.
+3. Fill in your key:
+   ```env
+   GROQ_API_KEY=gsk_your_key_here
+   GROQ_CHAT_MODEL=llama-3.3-70b-versatile
+   ```
+4. Restart the backend. The system will automatically detect the key and switch from Ollama to Groq for chat.
 
 ---
 
@@ -88,9 +109,9 @@ When a user types a message to Maya like *"I want red sneakers under ₹2000"*, 
  └──────────┬──────────────┬───────────────────┘
             │              │              │
     ┌───────▼──────┐ ┌─────▼──────┐ ┌────▼────────┐
-    │  MongoDB     │ │  ChromaDB  │ │   Ollama    │
-    │  Atlas       │ │  (vectors) │ │  qwen2.5:3b │
-    │  (main data) │ │            │ │  nomic-emb  │
+    │  MongoDB     │ │  ChromaDB  │ │   AI Layer  │
+    │  Atlas       │ │  (vectors) │ │  (Ollama/   │
+    │  (main data) │ │            │ │   Groq)     │
     └──────────────┘ └────────────┘ └─────────────┘
 ```
 
@@ -604,4 +625,4 @@ python -m scripts.seed_products
 
 ## 👤 Author
 
-**Befach Project** — Built with FastAPI, Next.js 15, and Ollama.
+**Befach Project** — Built with FastAPI, Next.js 15, Ollama, and Groq.
