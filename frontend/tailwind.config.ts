@@ -10,11 +10,16 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          50: "#f5f3ff",
+          50:  "#f5f3ff",
           100: "#ede9fe",
+          200: "#ddd6fe",
+          400: "#a78bfa",
           500: "#8b5cf6",
           600: "#7c3aed",
           700: "#6d28d9",
+          800: "#5b21b6",
+          900: "#3b0764",
+          950: "#1e0048",
         },
       },
       keyframes: {

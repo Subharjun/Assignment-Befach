@@ -54,22 +54,24 @@ export default function HomePage() {
   return (
     <div className="space-y-4 -mx-4 sm:mx-0">
       {/* Hero banner */}
-      <section className="relative h-48 sm:h-72 overflow-hidden bg-gradient-to-r from-[#131921] via-[#232f3e] to-[#37475a] text-white">
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_50%,rgba(255,153,0,0.6),transparent_50%)]" />
+      <section className="relative h-48 sm:h-72 overflow-hidden bg-gradient-to-br from-[#1e0048] via-[#3b0764] to-[#5b21b6] text-white">
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_50%,rgba(167,139,250,0.5),transparent_55%)]" />
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.6),transparent_50%)]" />
         <div className="mx-auto max-w-7xl px-4 h-full flex items-center justify-between relative">
           <div className="max-w-xl">
-            <div className="text-xs uppercase tracking-widest text-orange-300">AI Shopping — voice first</div>
-            <h1 className="mt-2 text-2xl sm:text-4xl font-semibold leading-tight">
+            <div className="text-xs uppercase tracking-widest text-violet-300 font-medium">AI Shopping — voice first</div>
+            <h1 className="mt-2 text-2xl sm:text-4xl font-bold leading-tight">
               Tell Maya what you need.<br/> She'll walk you to it.
             </h1>
+            <p className="mt-2 text-sm text-white/70 hidden sm:block">One World. Endless Choices. Powered by AI.</p>
             <button
               onClick={() => setVoiceOpen(true)}
-              className="mt-4 inline-flex items-center gap-2 bg-orange-400 hover:bg-orange-500 text-neutral-900 px-4 py-2 rounded-full font-medium"
+              className="mt-4 inline-flex items-center gap-2 bg-violet-500 hover:bg-violet-400 text-white px-5 py-2.5 rounded-full font-semibold shadow-lg shadow-violet-900/50 transition"
             >
               <Mic className="w-4 h-4" /> Talk to Maya
             </button>
           </div>
-          <div className="hidden md:block text-7xl opacity-30">🛍️</div>
+          <div className="hidden md:block text-8xl opacity-20 select-none">✦</div>
         </div>
       </section>
 
@@ -79,13 +81,13 @@ export default function HomePage() {
           <a
             key={t.q}
             href={`/category/${encodeURIComponent(t.q)}`}
-            className="bg-white dark:bg-neutral-900 rounded-md p-4 shadow-sm border border-black/5 dark:border-white/10 hover:shadow-lg transition"
+            className="bg-white dark:bg-[#160030] rounded-xl p-4 shadow-sm border border-violet-100 dark:border-violet-900/40 hover:shadow-lg hover:border-violet-300 dark:hover:border-violet-700 transition"
           >
             <div className="font-semibold text-sm sm:text-base">{t.title}</div>
-            <div className="relative w-full aspect-[4/3] mt-3 rounded overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+            <div className="relative w-full aspect-[4/3] mt-3 rounded-lg overflow-hidden bg-violet-50 dark:bg-violet-950/30">
               <img src={t.img} alt={t.title} className="w-full h-full object-cover" />
             </div>
-            <div className="mt-2 text-xs text-blue-700 dark:text-blue-300 hover:underline">Shop now</div>
+            <div className="mt-2 text-xs text-violet-600 dark:text-violet-400 font-medium hover:underline">Shop now →</div>
           </a>
         ))}
       </section>
@@ -106,7 +108,7 @@ export default function HomePage() {
 
       {/* Browse all */}
       <section className="mx-auto max-w-7xl px-4">
-        <div className="bg-white dark:bg-neutral-900 rounded-md p-4 shadow-sm border border-black/5 dark:border-white/10">
+        <div className="bg-white dark:bg-[#160030] rounded-xl p-4 shadow-sm border border-violet-100 dark:border-violet-900/40">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold">Explore the mall</h2>
             <span className="text-xs opacity-70">{products?.length ?? "—"} items</span>

@@ -87,4 +87,16 @@ export const api = {
 
   pushHistory: (slug: string, token: string) =>
     request(`/users/history/${slug}`, { method: "POST" }, token),
+
+  transcribe: async (blob: Blob): Promise<{ text: string }> => {
+    const form = new FormData();
+    form.append("file", blob, "audio.webm");
+    const res = await fetch(`${BASE}/transcribe`, {
+      method: "POST",
+      body: form,
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+    return res.json() as Promise<{ text: string }>;
+  },
 };

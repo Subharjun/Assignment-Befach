@@ -87,7 +87,7 @@ export default function SearchBar() {
           e.preventDefault();
           submit();
         }}
-        className="flex h-10 rounded-md overflow-hidden shadow-sm ring-1 ring-transparent focus-within:ring-orange-400 transition"
+        className="flex h-10 rounded-md overflow-hidden shadow-sm ring-1 ring-transparent focus-within:ring-violet-500 transition"
       >
         <div className="hidden sm:flex items-center gap-1 px-3 bg-neutral-100 dark:bg-neutral-800 text-xs border-r border-black/10 dark:border-white/10">
           <MapPin className="w-3.5 h-3.5" /> All
@@ -107,7 +107,7 @@ export default function SearchBar() {
         <button
           type="submit"
           aria-label="Search"
-          className="px-4 bg-orange-400 hover:bg-orange-500 text-neutral-900 grid place-items-center"
+          className="px-4 bg-violet-600 hover:bg-violet-500 text-white grid place-items-center"
         >
           <Search className="w-4 h-4" />
         </button>

@@ -98,7 +98,7 @@ export default function CategoryPage() {
                 className={
                   "px-3 py-1.5 rounded border border-black/10 dark:border-white/10 " +
                   (p === page
-                    ? "bg-orange-400 text-neutral-900 font-medium"
+                    ? "bg-violet-600 text-white font-medium"
                     : "bg-white dark:bg-neutral-900")
                 }
               >
